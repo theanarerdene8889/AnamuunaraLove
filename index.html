@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anamuunara - Бидний Хайрын Түүх</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+        
+        .logo span {
+            color: #9c27b0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #e91e63;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #9c27b0;
+        }
+        
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f9fa"/><path d="M0 0L100 100M100 0L0 100" stroke="%23f8bbd9" stroke-width="1"/></svg>');
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #e91e63;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #7f8c8d;
+        }
+        
+        .couple-names {
+            font-size: 2.5rem;
+            color: #9c27b0;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e91e63;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            height: 300px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-placeholder {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+        
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .our-story {
+            padding: 80px 0;
+            background: #fce4ec;
+        }
+        
+        .story-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .story-text {
+            flex: 1;
+        }
+        
+        .story-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .timeline {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e91e63;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            width: 50%;
+            padding: 20px;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 40px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e91e63;
+            border-radius: 50%;
+            top: 30px;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+        
+        .love-message {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .love-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .love-message p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #e91e63;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .story-content {
+                flex-direction: column;
+            }
+            
+            .timeline-container::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 50px !important;
+                padding-right: 20px !important;
+            }
+            
+            .timeline-item::after {
+                left: 10px !important;
+                right: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Anamuunara<span></span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#gallery">Зургийн цомог</a></li>
+                        <li><a href="#story">Бидний түүх</a></li>
+                        <li><a href="#timeline">Цаг хугацаа</a></li>
+                        <li><a href="#message">Сэтгэлийн үг</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="couple-names">Anar&Namuun</div>
+            <h1>Бидний Хайрын Түүх</h1>
+            <p>Энэ бол бидний хайрын түүх, дурсамжуудын цомог. Бидний хамтдаа туулсан сайхан мөчүүд энд бичигдсэн.</p>
+            <a href="#gallery" class="btn">Зургуудыг үзэх</a>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Зургийн Цомог</h2>
+                <p>Зүгээр л зураг биш. Угаасаа зүгээр л гэж байдаггүй.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Зураг 1 -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i>📷</i>
+                        <p>гоёшд</p>
+                        
+                    </div>
+                   
+                    <img src="Screenshot_20251029_224828_Photos[1].jpg" alt="">
+                </div>
+                
+                <!-- Зураг 2 -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i>📷</i>
+                        <p>#хаа Сайгүй, #өдөрт нэг зурга, #instacouplekkk</p>
+                        
+                    </div>
+                    <img src="Screenshot_20251029_225318_Gallery[1].jpg" alt="">
+                </div>
+                
+                <!-- Зураг 3 -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i>📷</i>
+                        <p>Түүхт мөч жич: бид уугаагүй.</p>
+                        
+                    </div>
+                    <img src="Screenshot_20251029_225444_Gallery[1].jpg" alt="">
+                </div>
+                
+                <!-- Зураг 4 -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i>📷</i>
+                        <p>ингэж үнсдэг л дээ</p>
+                        
+                    </div>
+                    <img src="IMG_20250904_091606_815[1].jpg" alt="">
+                </div>
+                
+                <!-- Зураг 5 -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i>📷</i>
+                        <p>Ариун хайр is real</p>
+                        
+                    </div>
+                    <img src="Screenshot_20251029_230902_Gallery.jpg" alt="">
+                </div>
+                
+                <!-- Зураг 6 -->
+                <div class="gallery-item">
+                    <div class="image-placeholder">
+                        <i>📷</i>
+                        <p>хотоор салхи татуулна даа гэЖ...</p>
+                    
+                    </div>
+                    <img src="Screenshot_20251029_231109_Instagram.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story" class="our-story">
+        <div class="container">
+            <div class="section-title">
+                <h2>Бидний Түүх</h2>
+                <p>Анх уулзахаас өнөөг хүртэлх аялал</p>
+            </div>
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Анхны уулзалт</h3>
+                    <p>Бид анх 2019 оны 12 сарын 24нд уулзсан. Энэ нь санамсаргүй боловч амьдралд өөрчлөлт авчирсан уулзалт байлаа. Танихгүй байсан ч бидний хооронд ямар нэгэн холбоо мэдрэгдэж байв.</p>
+                    
+                    <h3>Хайрын эхлэл</h3>
+                    <p>Анхны яриа, анхны инээд, анхны хамтдаа өнгөрүүлсэн өдрүүд... Эдгээр бүхэн бидний хайрын түүхийг бүтээж эхлэв. Өдөр бүр бид бие биенээ улам сайн таньж, хайрлах болсон.</p>
+                    
+                    <h3>Өнөөдөр</h3>
+                    <p>Одоо бид хамтдаа амьдралын шинэ бүлэг нээж байна. Харилцан ойлголцол, хайр, хүндлэл бас итгэл дээр суурилсан манай харилцаа өдөр бүр улам бүр гүнзгийрч байна. Жич: живээд үхчихгүй л бол kk...</p>
+                </div>
+                <div class="story-image">
+                    <div class="image-placeholder">
+                        <i></i>
+                        <p>   </p>
+                        <small>  </small>
+                    </div>
+                    
+                    <img src="Screenshot_20251029_230912_Gallery.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-title">
+                <h2>Манай Харилцааны Цаг Хугацаа</h2>
+                <p>Бидний хамтдаа туулсан чухал мөчүүд</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-date">2019 оны 12 сар</div>
+                    <h3>Анхны уулзалт</h3>
+                    <p>Кофе шопп дотор санамсаргүй уулзалт аа наахгүй юу kkk brain evolution гэж газарт танилцаж байлаа. Хэл усандаа сайн юм болохоор хэлтэй устай бид 2 ч өөр л дөө. Энэ өдөр бидний амьдрал үүрд өөрчлөгдөв.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020 оны 6 сар</div>
+                    <h3>Анхны болзоо</h3>
+                    <p>Хамтдаа кино үзэх, хоолны газраар зочлох өдрүүд эхэлсэн.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020 оны зун</div>
+                    <h3>Анхны аялал</h3>
+                    <p>Хамтдаа анх удаа агаарт гарав. Богд уул is the best. You know what im saying? Энэ аялал биднийг улам ойртуулсан аанаахгүй юу тийм ээ угаасаа хайртай л даа..</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 он</div>
+                    <h3>Нуугдаж уулздаг өдрүүд байлаа</h3>
+                    <p>Айлын жаахан охины гэр бүл надад эхэндээ тийм ч сайнгүй л байв kk. Ганц охин шүү дээ.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 оны</div>
+                    <h3>Итгэлийг нь дааж байгааг гэрийнхэн нь анзаарч эхлэсэн өдрүүд байлаа.</h3>
+                    <p>Үнэнч хайр минь өөрөө итгэж болох хүү байна даа гэдэг итгэлийг тэдэнд төрүүлж байгааг би анзаарч байсан юм даа. Ойр ойр орж гардаг болов. .</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023 он</div>
+                    <h3>Хамтдаа</h3>
+                    <p>Өдөр бүр дурлаж, хайрлаж миний хэзээ ч хойшлуулж үзээгүй хүн маань болсон байв.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024 он</div>
+                    <h3>Хадам ааваараа өндөг шаруулдаг болов</h3>
+                    <p>Аав өглөө өндөг шарчаарай! Шарыг нь хагалахгүй шүү! kkk...</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025 он</div>
+                    <h3>Одоо ч мөн хамтдаа</h3>
+                    <p>Өдөр бүр хамтдаа шинэ зүйл сурч, хамтдаа өсөж байна. Машинтай боллоо ш дээ. Яая кино кино. ahh btw im very grateful for that.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026 онд харин...</div>
+                    <h3>За байз</h3>
+                    <p>Байр авдаг ч юм уу? kkk.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="message" class="love-message">
+        <div class="container">
+            <h2>Хайрт минь</h2>
+            <p>"Чи надад гэрэл мэт ирсэн. Намайг гэрэлтүүлсэн, амьдралыг минь утга учиртай болгосон. Чиний хайр намайг хүчтэй болгодог, чиний инээд надад аз жаргал авчирдаг. Бид хамтдаа юу ч даван туулж чадна гэдэгт би итгэдэг. Чамтай хамт байх болгонд би илүү сайн хүн болж байгаа мэдрэмж төрдөг. Чи амьдралын минь хамгийн сайхан бэлэг. Хайртай шүү. Өөртөө зөндөө их, хүч сахилга бат, байдгийг мэдэж авсан шүү.<3."</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Anamuunara</h3>
+                    <p>Хайр дүүрэн хосын веб хуудас. Бидний хайрын түүхийг эндээс үзэх боломжтой.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Холбоос</h3>
+                    <ul>
+                        <li><a href="#gallery">Зургийн цомог</a></li>
+                        <li><a href="#story">Бидний түүх</a></li>
+                        <li><a href="#timeline">Цаг хугацаа</a></li>
+                        <li><a href="#message">Хайрын илэрхийлэл</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Холбоо барих</h3>
+                    <ul>
+                        <li>Улаанбаатар хот</li>
+                        <li>Killuazoldik236@gmail.com</li>
+                        <li>+976 88899095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Anamuunara. Бүх эрх хуулиар хамгаалагдсан. Хайраар бүтсэн, итгэлээр баталгаажсан болно!
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
